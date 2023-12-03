@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:news_letter/module/data_layer/models/news_model.dart';
 
 import '../../domain_layer/entities/news.dart';
 
 abstract class BaseNewsRemoteDataSource {
-
-
-  Stream<List<News>> getNewsStream() ;
-
+  Stream<List<News>> getNewsStream();
 }
 
 class NewsRemoteDataSource extends BaseNewsRemoteDataSource {
@@ -17,13 +15,7 @@ class NewsRemoteDataSource extends BaseNewsRemoteDataSource {
   Stream<List<News>> getNewsStream(){
     return newsCollection.snapshots().map((querySnapshot) {
       return querySnapshot.docs.map((doc) {
-        return News(
-          id: doc.id,
-          date: doc['date'] as DateTime,
-          description: doc['description'] as String,
-          head: doc['head'] as String,
-          images: doc['images'] as List<String>,
-        );
+        return NewsModel.fromJson(doc);
       }).toList();
     });
   }
