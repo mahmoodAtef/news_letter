@@ -22,5 +22,4 @@ class NewsModel extends News {
       "images"  : images,
     };
   }
-
 }
