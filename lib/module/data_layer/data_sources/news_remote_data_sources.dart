@@ -9,7 +9,7 @@ abstract class BaseNewsRemoteDataSource {
 
 class NewsRemoteDataSource extends BaseNewsRemoteDataSource {
   final CollectionReference newsCollection =
-  FirebaseFirestore.instance.collection('news');
+  FirebaseFirestore.instance.collection('news_letter');
 
   @override
   Stream<List<News>> getNewsStream(){

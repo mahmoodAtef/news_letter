@@ -38,6 +38,11 @@ dependencies:
   equatable:
   image_picker: ^1.0.4
 
+  # bloc
+  bloc:
+  flutter_bloc:
+
+
  # Firebase
 
   firebase_core:
