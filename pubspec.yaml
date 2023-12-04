@@ -50,7 +50,7 @@ dependencies:
 
   firebase_core:
   cloud_firestore:
-#readmore:  for read more buttom  ,The button was created without it
+#readmore:  for read more button ,The button was created without it
 dev_dependencies:
   flutter_test:
     sdk: flutter
