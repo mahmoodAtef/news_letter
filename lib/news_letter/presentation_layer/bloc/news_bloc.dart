@@ -15,7 +15,9 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   NewsBloc(NewsInitial newsInitial) : super(NewsInitial()) {
     on<NewsEvent>((event, emit) async {
      if (event is GetNewsEvent){
+       emit(GetNewsLoading());
      newsLetter =  GetNewsLetterUseCase(sl()).call();
+     emit(GetNewsSuccess());
      }
     });
   }
