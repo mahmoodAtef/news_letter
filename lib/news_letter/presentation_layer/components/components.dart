@@ -68,28 +68,36 @@ Widget buildNewsWidget(News news) {
     child: imagesRow,
   );
 
+bool readMore = false ;
 
 
-
-  Widget mainColumn = SizedBox(
-    height: 50.h, // افتراضي أن الارتفاع المخصص هنا 200 وحدة
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        dateRow,
-        spacedImagesRow,
-        Text(
-          news.head,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        Container(
-          margin:  EdgeInsets.only(top: 8.sp),
-          child: ReadMoreText(
-              trimCollapsedText: 'read more',
-              news.description ,trimLines: 6 ,style: TextStyle(fontSize: 12.sp, color: Colors.grey) ,
-              trimMode: TrimMode.Line , colorClickableText: ColorManager.primary),
-        ),
-      ],
+  Widget mainColumn = InkWell(
+    onTap: (){
+      print("object");
+    },
+    child: SizedBox(
+      height: 50.h, // افتراضي أن الارتفاع المخصص هنا 200 وحدة
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          dateRow,
+          spacedImagesRow,
+          Text(
+            news.head,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          Container(
+            margin:  EdgeInsets.only(top: 8.sp),
+            child: ReadMoreText(
+               callback: (value) {
+                 value = false;
+               },
+                trimCollapsedText: 'read more',
+                news.description ,trimLines: 6 ,style: TextStyle(fontSize: 12.sp, color: Colors.grey) ,
+                trimMode: TrimMode.Line , colorClickableText: ColorManager.primary),
+          ),
+        ],
+      ),
     ),
   );
 

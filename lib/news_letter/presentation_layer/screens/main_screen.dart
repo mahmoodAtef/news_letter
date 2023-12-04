@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_letter/news_letter/domain_layer/entities/news.dart';
+import 'package:news_letter/news_letter/presentation_layer/bloc/news_bloc.dart';
 import 'package:news_letter/news_letter/presentation_layer/components/components.dart';
+import 'package:sizer/sizer.dart';
+
+import '../../../core/services/dep_injection.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    NewsBloc bloc = sl();
+    return BlocProvider<NewsBloc>(
+  create: (context) => sl(),
+  child: Scaffold(
       appBar: AppBar(
-    
+    title: const Text("News Letter" , style: TextStyle(
+      fontWeight: FontWeight.bold
+    ),),
       ),
-      body: buildNewsWidget(news),
-    );
+      body: StreamBuilder(stream: bloc.newsLetter, builder: (context , builder){
+        return ListView.separated(itemBuilder: (context , index)=> buildNewsWidget
+          (builder.data![index]), separatorBuilder: (context , index)=> SizedBox(
+          height: 5.sp,
+        ), itemCount: builder.data!.length = 0);
+      },),
+    ),
+);
   }
 }
 

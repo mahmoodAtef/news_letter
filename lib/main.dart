@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:news_letter/news_letter/presentation_layer/screens/main_screen.dart';
 import 'package:sizer/sizer.dart';
 
+import 'core/services/dep_injection.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  ServiceLocator().init();
   runApp(const MyApp());
 }
 
@@ -26,5 +31,6 @@ class MyApp extends StatelessWidget {
       );
   }
 }
+
 
 

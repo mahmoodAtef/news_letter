@@ -7,8 +7,7 @@ import '../../news_letter/presentation_layer/bloc/news_bloc.dart';
 final sl = GetIt.instance;
 
 class ServiceLocator {
-  Future<void> init() async {
-
+  void init()  {
 
     /// main
 
