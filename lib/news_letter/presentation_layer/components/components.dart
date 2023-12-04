@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:news_letter/core/utils/color_manager.dart';
 import 'package:news_letter/core/utils/navigation_manager.dart';
 import 'package:news_letter/news_letter/presentation_layer/screens/news_details.dart';
-import 'package:readmore/readmore.dart';
+
 import 'package:sizer/sizer.dart';
 
 import '../../domain_layer/entities/news.dart';

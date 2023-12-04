@@ -35,13 +35,13 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  intl:
-  equatable:
-  image_picker: ^1.0.4
-  get_it:
-  sizer:
-  hexcolor:
-  # bloc
+  intl:  # for calculate Time ago to news
+  equatable: # If we have two objects of the same type and have the same value, they are stored in memory as one variable to preserve memory
+  image_picker: ^1.0.4 #  for pick image
+  get_it: # for dependency injection
+  sizer: # To create responsive screens
+  hexcolor: # To create Hex-type colors with the same degree as those in the design
+  # bloc  (STATE MANAGEMENT)
   bloc:
   flutter_bloc:
 
@@ -50,8 +50,7 @@ dependencies:
 
   firebase_core:
   cloud_firestore:
-  readmore: ^2.2.0
-
+#readmore:  for read more buttom  ,The button was created without it
 dev_dependencies:
   flutter_test:
     sdk: flutter
