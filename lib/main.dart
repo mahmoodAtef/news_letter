@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:news_letter/news_letter/presentation_layer/screens/main_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -8,6 +9,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   ServiceLocator().init();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
                 colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                 useMaterial3: true,
               ),
-              home: MainScreen(),
+              home: const MainScreen(),
             );
           }
       );

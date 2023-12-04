@@ -71,12 +71,101 @@ Widget buildNewsWidget(News news) {
 bool readMore = false ;
 
 
-  Widget mainColumn = InkWell(
-    onTap: (){
-      print("object");
-    },
-    child: SizedBox(
-      height: 50.h, // افتراضي أن الارتفاع المخصص هنا 200 وحدة
+  Widget mainColumn = SizedBox(
+    height: 50.h, // افتراضي أن الارتفاع المخصص هنا 200 وحدة
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        dateRow,
+        spacedImagesRow,
+        Text(
+          news.head,
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        Container(
+          margin:  EdgeInsets.only(top: 8.sp),
+          child: ReadMoreText(
+             callback: (value) {
+               value = false;
+             },
+              trimCollapsedText: 'read more',
+              news.description ,trimLines: 6 ,style: TextStyle(fontSize: 12.sp, color: Colors.grey) ,
+              trimMode: TrimMode.Line , colorClickableText: ColorManager.primary),
+        ),
+      ],
+    ),
+  );
+
+  return mainColumn;
+}
+
+Widget buildNewsDetails(News news) {
+  Duration timeAgo = DateTime.now().difference(news.date);
+  String timeAgoString = calculateTimeAgo(timeAgo);
+
+  Widget dateRow = Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Text(
+        timeAgoString,
+        style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold, color: ColorManager.primary),
+      ),
+      Text(
+        DateFormat('dd-MM-yyyy').format(news.date),
+        style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold, color: Colors.grey),
+      ),
+    ],
+  );
+
+  List<Widget> imageWidgets = news.images.take(3).map((image) =>
+      Image.network(image, fit: BoxFit.cover)).toList();
+
+  Widget imagesRow;
+
+  if (imageWidgets.length == 1) {
+    imagesRow = SizedBox(
+      height: 20.h,
+      width: double.infinity,
+      child: imageWidgets[0],
+    );
+  } else if (imageWidgets.length == 2) {
+    imagesRow = Row(
+      children: imageWidgets
+          .map((image) => Padding(
+        padding: EdgeInsets.only(right: 10.0),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: 45.w),
+          child: image,
+        ),
+      ))
+          .toList(),
+    );
+  } else {
+    imagesRow = Row(
+      children: imageWidgets
+          .map((image) => Padding(
+        padding: EdgeInsets.only(right: 7.0.sp),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: 30.w),
+          child: image,
+        ),
+      ))
+          .toList(),
+    );
+  }
+
+  Widget spacedImagesRow = SizedBox(
+    height: 20.h,
+    width: double.infinity,
+    child: imagesRow,
+  );
+
+
+
+
+  Widget mainColumn = SizedBox(
+    height: 50.h, // افتراضي أن الارتفاع المخصص هنا 200 وحدة
+    child: SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -84,27 +173,22 @@ bool readMore = false ;
           spacedImagesRow,
           Text(
             news.head,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           Container(
             margin:  EdgeInsets.only(top: 8.sp),
-            child: ReadMoreText(
-               callback: (value) {
-                 value = false;
-               },
-                trimCollapsedText: 'read more',
-                news.description ,trimLines: 6 ,style: TextStyle(fontSize: 12.sp, color: Colors.grey) ,
-                trimMode: TrimMode.Line , colorClickableText: ColorManager.primary),
+            child: Text(
+        news.description ,
+            style: TextStyle(fontSize: 12.sp, color: Colors.grey) ,
+
           ),
-        ],
+          )],
       ),
     ),
   );
 
   return mainColumn;
 }
-
-
 // دالة لحساب المدة من التاريخ المعطى إلى الوقت الحالي
 String calculateTimeAgo(Duration timeDifference) {
   final int seconds = timeDifference.inSeconds;
