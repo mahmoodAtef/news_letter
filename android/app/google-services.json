@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "93047353192",
+    "project_id": "news-letter-e87b2",
+    "storage_bucket": "news-letter-e87b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93047353192:android:706978dc823661e9a870dd",
+        "android_client_info": {
+          "package_name": "com.example.news_letter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-xEIOMMxZor3RYMschDcB4lFNvPyczdQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
