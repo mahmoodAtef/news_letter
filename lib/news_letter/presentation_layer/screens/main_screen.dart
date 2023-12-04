@@ -21,7 +21,7 @@ class MainScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: const BackButton(),
+              centerTitle: true,
               title: const Text(
                 "News Letter",
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -32,7 +32,7 @@ class MainScreen extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   )
                 : Padding(
-                  padding: EdgeInsets.all(8.0.sp),
+                  padding: EdgeInsets.all(10.0.sp),
                   child: ListView.separated(
                       itemBuilder: (context, index) =>
                           InkWell(

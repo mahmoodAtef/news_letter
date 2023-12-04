@@ -7,8 +7,7 @@ import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../domain_layer/entities/news.dart';
-
-
+/// news Widget 
 Widget buildNewsWidget(News news  , BuildContext context) {
   Duration timeAgo = DateTime.now().difference(news.date);
   String timeAgoString = calculateTimeAgo(timeAgo);
@@ -28,7 +27,12 @@ Widget buildNewsWidget(News news  , BuildContext context) {
   );
 
   List<Widget> imageWidgets = news.images.take(3).map((image) =>
-      Image.network(image, fit: BoxFit.cover)).toList();
+      Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,image: NetworkImage(image))
+          ),
+          )).toList();
 
   Widget imagesRow;
 
@@ -70,34 +74,57 @@ Widget buildNewsWidget(News news  , BuildContext context) {
     child: imagesRow,
   );
 
-bool readMore = false ;
+
 
 
   Widget mainColumn = SizedBox(
-    height: 50.h, // افتراضي أن الارتفاع المخصص هنا 200 وحدة
+    height: 50.h,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         dateRow,
         spacedImagesRow,
-        SizedBox(
-          height: 20.h,
+        Expanded(
+          flex: 1,
           child: Text(
             news.head,
-
-            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
           ),
         ),
         Expanded(
+          flex: 2,
           child: Container(
             margin:  EdgeInsets.only(top: 8.sp),
-            child: ReadMoreText(
-               callback: (value) {
-                 context.push(NewsDetails(news: news));
-               },
-                trimCollapsedText: 'read more',
-                news.description ,trimLines: 4 ,style: TextStyle(fontSize: 12.sp, color: Colors.grey) ,
-                trimMode: TrimMode.Line , colorClickableText: ColorManager.primary),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                maxLines: 4,
+                    news.description,style: TextStyle
+                  (
+          
+                    overflow: TextOverflow.ellipsis,
+                    color: Colors.grey)
+                ),
+                if (news.description.length > 300 )
+                  GestureDetector(
+                    onTap: () {
+                      context.push(NewsDetails(news: news));
+                      print('تم النقر على زر عرض المزيد');
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: Text(
+                        'read more',
+                        style: TextStyle(
+                          color: ColorManager.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ],
@@ -106,7 +133,7 @@ bool readMore = false ;
 
   return mainColumn;
 }
-
+/// News details page
 Widget buildNewsDetails(News news) {
   Duration timeAgo = DateTime.now().difference(news.date);
   String timeAgoString = calculateTimeAgo(timeAgo);
@@ -126,7 +153,13 @@ Widget buildNewsDetails(News news) {
   );
 
   List<Widget> imageWidgets = news.images.take(3).map((image) =>
-      Image.network(image, fit: BoxFit.cover)).toList();
+      Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(image))
+        ),
+      )).toList();
 
   Widget imagesRow;
 
@@ -171,27 +204,24 @@ Widget buildNewsDetails(News news) {
 
 
 
-  Widget mainColumn = SizedBox(
-    height: 50.h, // افتراضي أن الارتفاع المخصص هنا 200 وحدة
-    child: SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          dateRow,
-          spacedImagesRow,
-          Text(
-            news.head,
-            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          Container(
-            margin:  EdgeInsets.only(top: 8.sp),
-            child: Text(
-        news.description ,
-            style: TextStyle(fontSize: 12.sp, color: Colors.grey) ,
+  Widget mainColumn = SingleChildScrollView(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        dateRow,
+        spacedImagesRow,
+        Text(
+          news.head,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        Container(
+          margin:  EdgeInsets.only(top: 8.sp),
+          child: Text(
+      news.description ,
+          style: TextStyle(fontSize: 12.sp, color: Colors.grey) ,
 
-          ),
-          )],
-      ),
+        ),
+        )],
     ),
   );
 
