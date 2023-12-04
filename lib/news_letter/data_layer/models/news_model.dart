@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:news_letter/module/domain_layer/entities/news.dart';
+import 'package:news_letter/news_letter/domain_layer/entities/news.dart';
 
 class NewsModel extends News {
   NewsModel({required super.id, required super.date, required super.description, required super.head, required super.images});

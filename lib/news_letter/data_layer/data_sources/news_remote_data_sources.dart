@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:news_letter/module/data_layer/models/news_model.dart';
 
 import '../../domain_layer/entities/news.dart';
+import '../models/news_model.dart';
 
 abstract class BaseNewsRemoteDataSource {
   Stream<List<News>> getNewsStream();
