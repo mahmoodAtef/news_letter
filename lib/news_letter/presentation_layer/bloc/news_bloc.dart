@@ -11,7 +11,7 @@ part 'news_event.dart';
 part 'news_state.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
- late Stream<List<News>> ? newsLetter ;
+  Stream<List<News>> ? newsLetter ;
   NewsBloc(NewsInitial newsInitial) : super(NewsInitial()) {
     on<NewsEvent>((event, emit) async {
      if (event is GetNewsEvent){
