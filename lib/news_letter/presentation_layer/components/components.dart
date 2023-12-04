@@ -25,7 +25,7 @@ Widget buildNewsWidget(News news) {
     ],
   );
 
-  List<Widget> imageWidgets = news.images.map((image) =>
+  List<Widget> imageWidgets = news.images.take(3).map((image) =>
       Image.network(image, fit: BoxFit.cover)).toList();
 
   Widget imagesRow;
@@ -36,18 +36,29 @@ Widget buildNewsWidget(News news) {
       width: double.infinity,
       child: imageWidgets[0],
     );
-  } else {
-    imagesRow = SizedBox(
-      width: 90.w,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: imageWidgets
-            .map((image) => Padding(
-          padding: EdgeInsets.only(right: 10.0),
+  } else if (imageWidgets.length == 2) {
+    imagesRow = Row(
+      children: imageWidgets
+          .map((image) => Padding(
+        padding: EdgeInsets.only(right: 10.0),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: 45.w),
           child: image,
-        ))
-            .toList(),
-      ),
+        ),
+      ))
+          .toList(),
+    );
+  } else {
+    imagesRow = Row(
+      children: imageWidgets
+          .map((image) => Padding(
+        padding: EdgeInsets.only(right: 10.0),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: 30.w),
+          child: image,
+        ),
+      ))
+          .toList(),
     );
   }
 
@@ -56,6 +67,7 @@ Widget buildNewsWidget(News news) {
     width: double.infinity,
     child: imagesRow,
   );
+
 
 
 
