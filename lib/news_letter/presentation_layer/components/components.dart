@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:news_letter/core/utils/color_manager.dart';
+import 'package:news_letter/core/utils/navigation_manager.dart';
+import 'package:news_letter/news_letter/presentation_layer/screens/news_details.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../domain_layer/entities/news.dart';
 
 
-Widget buildNewsWidget(News news) {
+Widget buildNewsWidget(News news  , BuildContext context) {
   Duration timeAgo = DateTime.now().difference(news.date);
   String timeAgoString = calculateTimeAgo(timeAgo);
 
@@ -78,19 +80,25 @@ bool readMore = false ;
       children: [
         dateRow,
         spacedImagesRow,
-        Text(
-          news.head,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        SizedBox(
+          height: 20.h,
+          child: Text(
+            news.head,
+
+            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+          ),
         ),
-        Container(
-          margin:  EdgeInsets.only(top: 8.sp),
-          child: ReadMoreText(
-             callback: (value) {
-               value = false;
-             },
-              trimCollapsedText: 'read more',
-              news.description ,trimLines: 6 ,style: TextStyle(fontSize: 12.sp, color: Colors.grey) ,
-              trimMode: TrimMode.Line , colorClickableText: ColorManager.primary),
+        Expanded(
+          child: Container(
+            margin:  EdgeInsets.only(top: 8.sp),
+            child: ReadMoreText(
+               callback: (value) {
+                 context.push(NewsDetails(news: news));
+               },
+                trimCollapsedText: 'read more',
+                news.description ,trimLines: 4 ,style: TextStyle(fontSize: 12.sp, color: Colors.grey) ,
+                trimMode: TrimMode.Line , colorClickableText: ColorManager.primary),
+          ),
         ),
       ],
     ),

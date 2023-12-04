@@ -4,12 +4,13 @@ import 'package:news_letter/news_letter/presentation_layer/screens/main_screen.d
 import 'package:sizer/sizer.dart';
 
 import 'core/services/dep_injection.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   ServiceLocator().init();
-  Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
