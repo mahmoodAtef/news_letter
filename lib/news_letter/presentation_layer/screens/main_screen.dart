@@ -31,7 +31,9 @@ class MainScreen extends StatelessWidget {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : Padding(
+                : BlocBuilder<NewsBloc, NewsState>(
+  builder: (context, state) {
+    return Padding(
                   padding: EdgeInsets.all(10.0.sp),
                   child: ListView.separated(
                       itemBuilder: (context, index) =>
@@ -44,7 +46,9 @@ class MainScreen extends StatelessWidget {
                         height: 5.sp,
                       ),
                       itemCount: bloc.newsLetter.length),
-                ),
+                );
+  },
+),
           );
         },
       ),
