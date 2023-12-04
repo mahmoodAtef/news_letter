@@ -16,6 +16,7 @@ class MainScreen extends StatelessWidget {
     return BlocProvider<NewsBloc>(
   create: (context) => sl(),
   child: BlocBuilder<NewsBloc, NewsState>(
+    bloc: bloc,
   builder: (context, state) {
     return Scaffold(
       appBar: AppBar(
