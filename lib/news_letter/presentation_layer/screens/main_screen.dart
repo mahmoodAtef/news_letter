@@ -15,7 +15,9 @@ class MainScreen extends StatelessWidget {
     NewsBloc bloc = sl()..add(GetNewsEvent());
     return BlocProvider<NewsBloc>(
   create: (context) => sl(),
-  child: Scaffold(
+  child: BlocBuilder<NewsBloc, NewsState>(
+  builder: (context, state) {
+    return Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
     title: const Text("News Letter" , style: TextStyle(
@@ -42,7 +44,9 @@ class MainScreen extends StatelessWidget {
         ),
       ),
     ),
-    ),
+    );
+  },
+),
 );
   }
 }
